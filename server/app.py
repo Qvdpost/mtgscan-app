@@ -49,7 +49,7 @@ def scan(rec, msg):
     box_cards = rec.box_texts_to_cards(box_texts)
     rec._assign_stacked(box_texts, box_cards)
     deck = rec.box_texts_to_deck(box_texts)
-    img = box_cards.get_image_base64(msg.get("image_64", msg["image"]))
+    img = box_cards.get_image_base64(msg["image"])
     return deck, img
 
 

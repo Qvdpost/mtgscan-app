@@ -1147,7 +1147,7 @@ symspellpy = ">=6.7.0"
 type = "git"
 url = "https://github.com/Qvdpost/mtgscan"
 reference = "HEAD"
-resolved_reference = "537024d5e9a2286df1a0903402bf8b935be8b8d5"
+resolved_reference = "6300c0571fc1684a2f0b941bb95ad03c021d828c"
 
 [[package]]
 name = "networkx"

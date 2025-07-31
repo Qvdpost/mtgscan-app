@@ -12,7 +12,7 @@ FROM base as mtgscan
 
 ENV PYTHONUNBUFFERED=1
 
-COPY . .
+COPY --chmod=0777 . .
 
 EXPOSE 5000
 
