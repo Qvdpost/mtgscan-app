@@ -1,6 +1,7 @@
 services:
   flask:
-    image: qfortier/mtgscan-server:4.0
+    image: mtgscanapp
+    build: ./server
     restart: always
     ports:
       - '80:80'
@@ -8,11 +9,11 @@ services:
       - redis/redis.env
 
   celery:
-    image: qfortier/mtgscan-server:4.0
+    image: mtgscanapp
+    build: ./server
     restart: always
     command: "poetry run celery -A app.celery worker -P eventlet --loglevel=info"
     env_file:
-      - azure.env
       - redis/redis.env
 
   redis:

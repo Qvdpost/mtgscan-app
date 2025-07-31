@@ -7,7 +7,7 @@ from pathlib import Path
 
 from celery import Celery, Task
 from flask import Flask, jsonify, render_template
-from mtgscan.ocr.azure import Azure
+from mtgscan.ocr.ocr import OCR
 from mtgscan.text import MagicRecognition
 from flask_socketio import SocketIO
 
@@ -15,7 +15,7 @@ DIR_DATA = Path(__file__).parent / "data"
 REDIS_URL = f"redis://:{os.environ.get('REDIS_PASSWORD')}@redis:6379/0"
 
 app = Flask(__name__)
-socketio = SocketIO(app, message_queue=REDIS_URL, cors_allowed_origins="*")
+socketio = SocketIO(app, message_queue=REDIS_URL, cors_allowed_origins="*", max_http_buffer_size=100_000_000)
 celery = Celery(app.name, broker=REDIS_URL, backend=REDIS_URL)
 
 
@@ -44,8 +44,8 @@ def scan_celery(msg):
 
 
 def scan(rec, msg):
-    azure = Azure()
-    box_texts = azure.image_to_box_texts(msg["image"], True)
+    ocr = OCR()
+    box_texts = ocr.image_to_box_texts(msg["image"])
     box_cards = rec.box_texts_to_cards(box_texts)
     rec._assign_stacked(box_texts, box_cards)
     deck = rec.box_texts_to_deck(box_texts)

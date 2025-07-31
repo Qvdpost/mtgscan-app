@@ -7,10 +7,13 @@ $(document).ready(_ => {
         const file = $("#file")[0].files[0];
         if (file) {
             const fr = new FileReader();
-            fr.readAsBinaryString(file);
-            fr.addEventListener("load", function () {
-                socketio.emit("scan", { "image": fr.result, "id": socketio.id, "image_64": btoa(fr.result) });
-            }, false);
+            fr.onload = () => {
+                socketio.emit("scan", { "image": fr.result, "id": socketio.id });
+            };
+            fr.onerror = () => {
+                showMessage("Error reading the file. Please try again.", "error");
+            };
+            fr.readAsArrayBuffer(file);
             $("#file")[0].value = "";
         }
         else {

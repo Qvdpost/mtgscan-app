@@ -7,16 +7,20 @@
     <title>Mtgscan</title>
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
     <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>
 </head>
 
 <body>
-    <style> .github-fork-ribbon:before { background-color: green; } </style>
+    <style>
+        .github-fork-ribbon:before {
+            background-color: green;
+        }
+    </style>
 
 
-    <a class="github-fork-ribbon" href="https://github.com/fortierq/mtgscan" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
     <h2 class="center-text">Convert an image to mtg decklist</h1>
 
         <form id="scan" class="center center-text" method="POST" enctype="multipart/form-data" action="#">
@@ -26,16 +30,17 @@
                 value="https://user-images.githubusercontent.com/49362475/105632710-fa07a180-5e54-11eb-91bb-c4710ef8168f.jpeg"><br>
             <input type="submit" value="Scan image">
         </form><br>
-        
+
         <div class="loader center" style="display:none"></div>
 
-        <img id="image"/><br>
+        <img id="image" /><br>
 
         <textarea class="center" id="decklist" style="display:none;height:300px;width:100%" readonly></textarea>
 
         <footer>
-            <p> <a href="https://fortierq.github.io/mtgscan-ocr-azure-flask-celery-socketio">Q. Fortier</a> | 
-            Wizards of the Coast, Magic: The Gathering, and their logos are trademarks of Wizards of the Coast LLC. © 1995-2022 Wizards. All rights reserved.</p>
+            <p> <a href="https://fortierq.github.io/mtgscan-ocr-azure-flask-celery-socketio">Q. Fortier</a> |
+                Wizards of the Coast, Magic: The Gathering, and their logos are trademarks of Wizards of the Coast LLC.
+                © 1995-2022 Wizards. All rights reserved.</p>
         </footer>
 
         <script src="{{ url_for('static', filename='index.js') }}"></script>
